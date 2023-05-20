@@ -6,7 +6,21 @@ from sklearn.metrics import accuracy_score
 import numpy as np
 
 
-data_dict = pickle.load(open('./data.pickle', 'rb'))
+data_dict = pickle.load(open('data.pickle', 'rb'))
+
+print(len(data_dict['data']))
+
+error_count = 0
+indices = []
+for x in data_dict['data']:
+    if len(x) != 42:
+        indices.append(data_dict['data'].index(x))
+        error_count += 1
+
+print(error_count)
+print(indices)
+
+
 
 data = np.asarray(data_dict['data'])
 labels = np.asarray(data_dict['labels'])

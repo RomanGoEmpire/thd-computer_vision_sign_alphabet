@@ -15,6 +15,7 @@ DATA_DIR = './data'
 data = []
 labels = []
 for dir_ in os.listdir(DATA_DIR):
+    print(f'starting {dir_}')
     for img_path in os.listdir(os.path.join(DATA_DIR, dir_)):
         data_aux = []
 
@@ -40,12 +41,10 @@ for dir_ in os.listdir(DATA_DIR):
                     data_aux.append(x - min(x_))
                     data_aux.append(y - min(y_))
 
-            data.append(data_aux)
-            labels.append(dir_)
+            if len(data_aux) == 42:
+                data.append(data_aux)
+                labels.append(dir_)
 
-print(data)
-print(labels)
-print(len(data[0]))
-f = open('data.pickle.txt', 'wb')
+f = open('data.pickle', 'wb')
 pickle.dump({'data': data, 'labels': labels}, f)
 f.close()
