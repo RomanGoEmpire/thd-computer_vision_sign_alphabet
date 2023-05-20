@@ -6,7 +6,7 @@ from sklearn.metrics import accuracy_score
 import numpy as np
 
 
-data_dict = pickle.load(open('data.pickle', 'rb'))
+data_dict = pickle.load(open('merged_data.pickle', 'rb'))
 
 print(len(data_dict['data']))
 
