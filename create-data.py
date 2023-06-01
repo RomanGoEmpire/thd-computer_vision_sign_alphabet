@@ -4,16 +4,17 @@ import pickle
 import cv2
 import mediapipe as mp
 
+DATA_DIR = 'data'
+data = []
+labels = []
+
+
 mp_hands = mp.solutions.hands
 mp_drawing = mp.solutions.drawing_utils
 mp_drawing_styles = mp.solutions.drawing_styles
 
-hands = mp_hands.Hands(static_image_mode=True, min_detection_confidence=0.3)
+hands = mp_hands.Hands(static_image_mode=True, min_detection_confidence=0.5)
 
-DATA_DIR = './data2'
-
-data = []
-labels = []
 for dir_ in os.listdir(DATA_DIR):
     print(f'starting {dir_}')
     for img_path in os.listdir(os.path.join(DATA_DIR, dir_)):
@@ -45,6 +46,6 @@ for dir_ in os.listdir(DATA_DIR):
                 data.append(data_aux)
                 labels.append(dir_)
 
-f = open('data2.pickle', 'wb')
+f = open('data.pickle', 'wb')
 pickle.dump({'data': data, 'labels': labels}, f)
 f.close()
