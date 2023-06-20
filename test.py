@@ -5,7 +5,7 @@ import cv2
 import mediapipe as mp
 import numpy as np
 
-model_dict = pickle.load(open('model2.p', 'rb'))
+model_dict = pickle.load(open('model.p', 'rb'))
 model = model_dict['model']
 
 cap = cv2.VideoCapture(0)
@@ -18,8 +18,7 @@ hands = mp_hands.Hands(static_image_mode=True, min_detection_confidence=0.7, max
 
 labels_dict = {0: "A", 1: "B", 2: "C", 3: "D", 4: "E", 5: "F", 6: "G", 7: "H", 8: "I", 10: "K", 11: "L", 12: "M",
                13: "N", 14: "O", 15: "P", 16: "Q", 17: "R", 18: "S", 19: "T",
-               20: "U", 21: "V", 22: "W", 23: "X", 24: "Y",25:"_",26:"."}
-
+               20: "U", 21: "V", 22: "W", 23: "X", 24: "Y", 25: "_", 26: "."}
 
 print(labels_dict)
 
@@ -80,7 +79,6 @@ while True:
         x2 = int(max(x_) * W) - 10
         y2 = int(max(y_) * H) - 10
         if len(data_aux) == 42:
-            print(data_aux)
             prediction = model.predict([np.asarray(data_aux)])
             predicted_character = labels_dict[int(prediction[0])]
             if last_prediction == predicted_character:

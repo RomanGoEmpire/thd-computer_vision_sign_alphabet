@@ -35,27 +35,16 @@ for dir_ in os.listdir(DATA_DIR):
                     x_.append(x)
                     y_.append(y)
 
-                min_x = min(x_)
-                min_y = min(y_)
-                max_x = max(x_)
-                max_y = max(y_)
-                distance_x = max_x - min_x
-                distance_y = max_y - min_y
-
                 for i in range(len(hand_landmarks.landmark)):
                     x = hand_landmarks.landmark[i].x
                     y = hand_landmarks.landmark[i].y
-
-                    new_x = x / distance_x
-                    new_y = y / distance_y
-
-                    data_aux.append(new_x)
-                    data_aux.append(new_y)
+                    data_aux.append(x - min(x_))
+                    data_aux.append(y - min(y_))
 
             if len(data_aux) == 42:
                 data.append(data_aux)
                 labels.append(dir_)
 
-f = open('new_data.pickle', 'wb')
+f = open('data.pickle', 'wb')
 pickle.dump({'data': data, 'labels': labels}, f)
 f.close()
